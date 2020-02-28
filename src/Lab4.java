@@ -1,11 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -19,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class ConnectFourGUI extends JFrame implements ActionListener
+public class Lab4 extends JFrame implements ActionListener
 {
     private static final int SIZE = 6;
     private JFrame frame;
@@ -43,15 +49,16 @@ public class ConnectFourGUI extends JFrame implements ActionListener
     // create a connect four
     ConnectFour connectFour = new ConnectFour(); 
     
-    ImageIcon player1 = new ImageIcon("src/main/java/red.png");
+    ImageIcon player1 = new ImageIcon(ResourceGetter.load("red.png"));
+    //ImageIcon player1 = new ImageIcon("src/red.png");
     Image image= player1.getImage().getScaledInstance(85, 85, Image.SCALE_SMOOTH);
     ImageIcon player1_resize = new ImageIcon(image);
     
-    ImageIcon player2 = new ImageIcon("src/main/java/blue.png");
+    ImageIcon player2 = new ImageIcon(ResourceGetter.load("blue.png"));
     Image image2 = player2.getImage().getScaledInstance(75, 75, Image.SCALE_SMOOTH);
     ImageIcon player2_resize = new ImageIcon(image2);
     
-    ImageIcon arrow = new ImageIcon("src/main/java/arrowdownred.png");
+    ImageIcon arrow = new ImageIcon(ResourceGetter.load("arrowdownred.png"));
     Image arrow_image = arrow.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
     ImageIcon arrow_resize = new ImageIcon(arrow_image);
    
@@ -91,8 +98,12 @@ public class ConnectFourGUI extends JFrame implements ActionListener
     JLabel winRecord = new JLabel();
     
     
-    public ConnectFourGUI()
+    ImageIcon p = new ImageIcon();
+    public Lab4() throws IOException
     {
+        //this.img = ImageIO.read(getClass().getResource("src/"));
+        //p.setImage(this.img);
+        
         // set up the Frame
         frame = new JFrame("hsuth - ConnectFour");
         frame.setVisible(true);
@@ -107,12 +118,11 @@ public class ConnectFourGUI extends JFrame implements ActionListener
         ClickButton();
         addMenus();
         setSouthPanel();
-
-
     }
     
     public void initializeBoard()
     {
+        
         winRecord.setText("Player Red wins: " + Red + " times \n Player Blue wins: " + Blue + " times");
         
         // set a message to tell whose turn it is
@@ -242,7 +252,11 @@ public class ConnectFourGUI extends JFrame implements ActionListener
         restart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearLabelBoard();
+                try {
+                    clearLabelBoard();
+                } catch (IOException ex) {
+                    Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });  
         
@@ -260,7 +274,7 @@ public class ConnectFourGUI extends JFrame implements ActionListener
                 JFileChooser fc = new JFileChooser(); 
                 fc.setDialogTitle("Please Select a Text File to load to your board");
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                if (fc.showOpenDialog(ConnectFourGUI.this) == JFileChooser.APPROVE_OPTION )
+                if (fc.showOpenDialog(Lab4.this) == JFileChooser.APPROVE_OPTION )
                 {
                     File file = fc.getSelectedFile();
                     connectFour.loadBoard(file.getAbsolutePath());
@@ -308,7 +322,7 @@ public class ConnectFourGUI extends JFrame implements ActionListener
                 JFileChooser fc = new JFileChooser(); 
                 fc.setDialogTitle("Please Select a Text File to save to your board");
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                if (fc.showOpenDialog(ConnectFourGUI.this) == JFileChooser.APPROVE_OPTION )
+                if (fc.showOpenDialog(Lab4.this) == JFileChooser.APPROVE_OPTION )
                 {
                     File file = fc.getSelectedFile();
                     connectFour.saveBoard(file.getAbsolutePath());
@@ -368,8 +382,8 @@ public class ConnectFourGUI extends JFrame implements ActionListener
         }
     }
     
-    private void clearLabelBoard() {
-        new ConnectFourGUI();
+    private void clearLabelBoard() throws IOException {
+        new Lab4();
         frame.setVisible(false);
         frame.dispose();
     }
@@ -400,9 +414,16 @@ public class ConnectFourGUI extends JFrame implements ActionListener
         frame.add(SouthPanel, BorderLayout.SOUTH);
     }
     
-    public static void main(String args[])
+    public void painComponent(Graphics g)
     {
-	ConnectFourGUI connectFourGame = new ConnectFourGUI();
+        super.paint(g);
+        g.setColor(Color.red);
+        g.drawOval(100, 10, 30, 40);
+    }
+    
+    public static void main(String args[]) throws IOException
+    {
+	Lab4 connectFourGame = new Lab4();
     }
     
 
