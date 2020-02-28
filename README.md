@@ -1,6 +1,6 @@
 # ConnectFour
 
-##Features
+## Features
  A Connect Four game that supports the features of:
  1. restart a new game
  2. undo a move (only once)
