@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-public class Lab4 extends JFrame implements ActionListener
+public class ConnectFourGUI extends JFrame implements ActionListener
 {
     private static final int SIZE = 6;
     private JFrame frame;
@@ -99,7 +99,7 @@ public class Lab4 extends JFrame implements ActionListener
     
     
     ImageIcon p = new ImageIcon();
-    public Lab4() throws IOException
+    public ConnectFourGUI() throws IOException
     {
         //this.img = ImageIO.read(getClass().getResource("src/"));
         //p.setImage(this.img);
@@ -255,7 +255,7 @@ public class Lab4 extends JFrame implements ActionListener
                 try {
                     clearLabelBoard();
                 } catch (IOException ex) {
-                    Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ConnectFourGUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });  
@@ -274,7 +274,7 @@ public class Lab4 extends JFrame implements ActionListener
                 JFileChooser fc = new JFileChooser(); 
                 fc.setDialogTitle("Please Select a Text File to load to your board");
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                if (fc.showOpenDialog(Lab4.this) == JFileChooser.APPROVE_OPTION )
+                if (fc.showOpenDialog(ConnectFourGUI.this) == JFileChooser.APPROVE_OPTION )
                 {
                     File file = fc.getSelectedFile();
                     connectFour.loadBoard(file.getAbsolutePath());
@@ -322,7 +322,7 @@ public class Lab4 extends JFrame implements ActionListener
                 JFileChooser fc = new JFileChooser(); 
                 fc.setDialogTitle("Please Select a Text File to save to your board");
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                if (fc.showOpenDialog(Lab4.this) == JFileChooser.APPROVE_OPTION )
+                if (fc.showOpenDialog(ConnectFourGUI.this) == JFileChooser.APPROVE_OPTION )
                 {
                     File file = fc.getSelectedFile();
                     connectFour.saveBoard(file.getAbsolutePath());
@@ -383,7 +383,7 @@ public class Lab4 extends JFrame implements ActionListener
     }
     
     private void clearLabelBoard() throws IOException {
-        new Lab4();
+        new ConnectFourGUI();
         frame.setVisible(false);
         frame.dispose();
     }
@@ -423,7 +423,7 @@ public class Lab4 extends JFrame implements ActionListener
     
     public static void main(String args[]) throws IOException
     {
-	Lab4 connectFourGame = new Lab4();
+	ConnectFourGUI connectFourGame = new ConnectFourGUI();
     }
     
 
