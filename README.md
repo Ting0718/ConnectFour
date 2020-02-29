@@ -9,7 +9,7 @@
  
  ## Video Walkthrough
 
-<img src='' />
+<img src='https://github.com/Ting0718/ConnectFour/blob/master/walkthrough.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
  
