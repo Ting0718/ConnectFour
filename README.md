@@ -7,4 +7,10 @@
  3. load a file into the board by either entering a path or browsing
  4. save a file into the board
  
+ ## Video Walkthrough
+
+<img src='' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+ 
  
