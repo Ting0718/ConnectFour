@@ -265,6 +265,7 @@ public class ConnectFourGUI extends JFrame implements ActionListener
             public void actionPerformed(ActionEvent e) {
                 UndoAMove();
                 undo.setEnabled(false);
+                button.setEnabled(true);
             }
         });
         
